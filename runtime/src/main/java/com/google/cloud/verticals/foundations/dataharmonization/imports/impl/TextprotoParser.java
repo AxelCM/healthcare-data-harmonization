@@ -29,14 +29,12 @@ public class TextprotoParser extends ProtoParserBase {
   @Override
   public PipelineConfig parseProto(byte[] data, ImportPath path) {
     try {
-      // print for debugging
-      System.out.println(new String(data));
-      System.out.println("Parsing textproto");
       String textProto = new String(data);
       return TextFormat.parse(textProto, PipelineConfig.class);
     } catch (ParseException e) {
       throw new IllegalArgumentException(
-          "Invalid textproto format. Was expecting a text serialized Whistle proto.", e);
+          "Invalid textproto format. Was expecting a text serialized Whistle proto. Path: "
+              + path.getAbsPath() + " Data: " + new String(data), e);
     }
   }
 
