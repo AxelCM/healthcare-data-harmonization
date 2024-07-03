@@ -29,6 +29,9 @@ public class TextprotoParser extends ProtoParserBase {
   @Override
   public PipelineConfig parseProto(byte[] data, ImportPath path) {
     try {
+      // print for debugging
+      System.out.println(new String(data));
+      System.out.println("Parsing textproto");
       String textProto = new String(data);
       return TextFormat.parse(textProto, PipelineConfig.class);
     } catch (ParseException e) {
